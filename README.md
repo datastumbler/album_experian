@@ -1,2 +1,2 @@
-# album_experian
-Album API - Experian
+# odp_album
+Open Data Platform - Albums
