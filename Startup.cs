@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AlbumPhotoAPI.Helpers;
 
 namespace AlbumPhotoAPI
 {
@@ -32,6 +33,8 @@ namespace AlbumPhotoAPI
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AlbumPhotoAPI", Version = "v1" });
             });
+
+            services.AddScoped<IData, Data>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

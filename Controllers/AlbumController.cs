@@ -5,12 +5,17 @@ using System.Text.Json;
 
 namespace AlbumPhotoAPI.Controllers
 {
-
     [ApiController]
 
     [Route("[controller]/getalbum")]
-    public class getalbum : ControllerBase
+    public class getalbumController : ControllerBase
     {
+        private AlbumPhotoAPI.Helpers.IData _iData;
+
+        public getalbumController(AlbumPhotoAPI.Helpers.IData iData)
+        {
+            _iData = iData;
+        }
 
         [HttpGet]
         public string Get()
@@ -20,14 +25,14 @@ namespace AlbumPhotoAPI.Controllers
             string endpointPhotos = "https://jsonplaceholder.typicode.com/photos";
 
             // Get data
-            string albumData = Helpers.Data.GetData(endpointAlbum);
-            string photoData = Helpers.Data.GetData(endpointPhotos);
+            string albumData = _iData.GetData(endpointAlbum);
+            string photoData = _iData.GetData(endpointPhotos);
 
             // Load into objects
             var albumList = JsonSerializer.Deserialize<IList<Models.Album>>(albumData);
             var photoList = JsonSerializer.Deserialize<IList<Models.Photo>>(photoData);
             List<Models.AlbumPhoto> albumPhotoList = new List<Models.AlbumPhoto>();
-
+            
             // Merge
             foreach (Models.Album album in albumList)
             {
@@ -57,8 +62,14 @@ namespace AlbumPhotoAPI.Controllers
     [ApiController]
 
     [Route("[controller]/getalbum/{id}")]
-    public class getalbumbyid : ControllerBase
+    public class getalbumbyidController : ControllerBase
     {
+        private AlbumPhotoAPI.Helpers.IData _iData;
+        public getalbumbyidController(AlbumPhotoAPI.Helpers.IData iData)
+        {
+            _iData = iData;
+        }
+
         [HttpGet]
         public string Get(string id)
         {
@@ -67,8 +78,8 @@ namespace AlbumPhotoAPI.Controllers
             string endpointPhotos = "https://jsonplaceholder.typicode.com/photos";
 
             // Get data
-            string albumData = Helpers.Data.GetData(endpointAlbum);
-            string photoData = Helpers.Data.GetData(endpointPhotos);
+            string albumData = _iData.GetData(endpointAlbum);
+            string photoData = _iData.GetData(endpointPhotos);
 
             // Load into objects
             var album = JsonSerializer.Deserialize<Models.Album>(albumData);

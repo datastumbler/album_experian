@@ -3,11 +3,14 @@ using System.Net;
 
 namespace AlbumPhotoAPI.Helpers
 {
-    public static class Data
+    public class Data : IData
     {
-        public static string GetData(string url)
+        public Data()
         {
-            var httpClient = new HttpClient();
+        }
+
+        public string GetData(string url)
+        {
 
             try
             {
